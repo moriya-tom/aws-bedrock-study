@@ -28,7 +28,8 @@ Amazonが提供する生成AIサービス複数のAIモデルをAPIで簡単に�
 - サーバーレスでスケーラブル
 
 ## Claud Opusについて
-![Claude Ops 基本情報
+!Claude Opus 基本情報
+
 
 ## 利用料金
 - オンデマンド(従量課金)
