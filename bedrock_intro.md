@@ -28,7 +28,7 @@ Amazonが提供する生成AIサービス複数のAIモデルをAPIで簡単に�
 - サーバーレスでスケーラブル
 
 ## Claud Opusについて
-!Claude Opus 基本情報
+- images/Designer.png
 
 
 ## 利用料金
