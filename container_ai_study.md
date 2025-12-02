@@ -17,6 +17,7 @@
 
 ### ● コンテナの特徴
 
+```
 ┌────── コンテナ ──────┐
 │                       │
 │ ┌───────┐             │
@@ -30,10 +31,7 @@
 │ │ Linux/OS │          │
 │ └─────────┘          │
 └──────────────────────┘
-
-
-
-
+```
 
 - ホストOS（カーネル）を共有  
 - プロセス分離（namespace）  
@@ -46,6 +44,7 @@
 
 ### ● VMとコンテナの違い（本質）
 
+```
 ┌───────────── VM ─────────────┐
 │ アプリケーション             │
 │ ライブラリ                  │
@@ -58,12 +57,10 @@
 │ アプリケーション                 │
 │ ライブラリ                      │
 │ コンテナ                       │
-│  (OSは持たずホストOSを共有)      │
+│ (OSは持たずホストOSを共有)       │
 │ ホストOS                        │
 └──────────────────────────┘
-
-
-
+```
 
 | 項目 | VM | コンテナ |
 |---|---|---|
@@ -88,23 +85,24 @@
 
 ### ● 今回のコンテナ構成例
 
+```
 ─────────────────────────────
- Azure VM（Ubuntu）
+  Azure VM（Ubuntu）
 ─────────────────────────────
   [ litellmコンテナ ]   port 4000
   [ redisコンテナ   ]   port 6379
   [ postgresコンテナ]   port 5432
 ─────────────────────────────
-
-
+```
 
 ---
 
 ### ● コンテナ間通信（DNS）
 
+```
 litellm → redis:6379
 litellm → postgres:5432
-
+```
 
 ホストIP不要  
 Docker内部ネットワークで通信  
@@ -115,23 +113,25 @@ Docker内部ネットワークで通信
 
 ## 3. LiteLLM を起動
 
-docker run -d -p 4000:4000
--e AZURE_API_KEY=$AZURE_API_KEY
--e AZURE_API_BASE=$AZURE_API_BASE
+```
+docker run -d -p 4000:4000 \
+-e AZURE_API_KEY=$AZURE_API_KEY \
+-e AZURE_API_BASE=$AZURE_API_BASE \
 ghcr.io/berriai/litellm:main-stable
-
+```
 
 ---
 
 ## 4. モデルに問い合わせる
 
-curl -X POST "http://<VM_IP>:4000/v1/chat/completions"
--H "Content-Type: application/json"
+```
+curl -X POST "http://<VM_IP>:4000/v1/chat/completions" \
+-H "Content-Type: application/json" \
 -d '{
 "model": "gpt-4o",
 "messages": [{"role":"user","content":"DockerとVMの違いは？"}]
 }'
-
+```
 
 ---
 
@@ -164,11 +164,12 @@ curl -X POST "http://<VM_IP>:4000/v1/chat/completions"
 
 ---
 
-#  まとめ
+# まとめ
 
-✔ AI推論環境は複数コンポーネントで構成される
-✔ コンテナは OS 非依存で軽量な分離実行環境
-✔ LiteLLM が AIの共通ゲートウェイとして機能
-✔ コンテナ化で再現性と拡張性を実現
-✔ AIを社内基盤として運用できる
-
+```
+✔ AI推論環境は複数コンポーネントで構成される  
+✔ コンテナは OS 非依存で軽量な分離実行環境  
+✔ LiteLLM が AIの共通ゲートウェイとして機能  
+✔ コンテナ化で再現性と拡張性を実現  
+✔ AIを社内基盤として運用できる  
+```
